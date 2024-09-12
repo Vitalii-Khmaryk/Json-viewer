@@ -25,7 +25,7 @@ const JsonExplorer: FC<IJsonExplorer> = ({ data, searchTerm }) => {
   };
 
   const filterNodes = (data: any): boolean => {
-    if (typeof data === "object") {
+    if (typeof data === "object" && typeof data !== null) {
       return Object.keys(data).some((key) => {
         const value = data[key];
         return matchesSearch(key, value) || filterNodes(value);
@@ -35,11 +35,11 @@ const JsonExplorer: FC<IJsonExplorer> = ({ data, searchTerm }) => {
   };
 
   const renderTree = (data: any, path: string): JSX.Element => {
-    if (typeof data === "object") {
+    if (typeof data === "object" && typeof data !== null) {
       return (
         <div className="ml-[20px]">
           <div onClick={() => toggleNode(path)} className="cursor-pointer">
-            {openNodes[path] ? "⮛" : "⮚"}
+            {openNodes[path] ? "⮟" : "⮞"}
           </div>
           {openNodes[path] && (
             <div>
